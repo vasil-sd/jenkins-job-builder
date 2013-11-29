@@ -36,6 +36,33 @@ import jenkins_jobs.modules.base
 from jenkins_jobs.modules.builders import create_builders
 
 
+def logfilesize(parser, xml_parent, data):
+    """yaml: logfilesize
+    Abort the build if its logfile becames too big.
+    Requires the Jenkins `Logfilesizechecker Plugin.
+    <https://wiki.jenkins-ci.org/display/JENKINS/Build-timeout+Plugin>`_
+
+    :arg bool fail: Mark the build as failed (default false)
+    :arg int size: Abort the build if logfile size is bigger than this value (in MB)
+
+    Example::
+
+      wrappers:
+        - logfilesize:
+            size: 1024
+            fail: true
+
+    """
+    lfswrapper = XML.SubElement(xml_parent,
+                              'hudson.plugins.logfilesizechecker.'
+                              'LogfilesizecheckerWrapper')
+    lfswrapper.set("plugin", "logfilesizechecker@1.2")
+    XML.SubElement(lfswrapper, 'setOwn').text = "true"
+    XML.SubElement(lfswrapper, 'maxLogSize').text = str(
+        data.get('size', '128')).lower()
+    XML.SubElement(lfswrapper, 'failBuild').text = str(
+        data.get('fail', 'false')).lower()
+
 def timeout(parser, xml_parent, data):
     """yaml: timeout
     Abort the build if it runs too long.
