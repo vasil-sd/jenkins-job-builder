@@ -204,6 +204,7 @@ setuptools.setup(
             'sauce-ondemand=jenkins_jobs.modules.wrappers:sauce_ondemand',
             'timeout=jenkins_jobs.modules.wrappers:timeout',
             'timestamps=jenkins_jobs.modules.wrappers:timestamps',
+            'logfilesize = jenkins_jobs.modules.wrappers:logfilesize',
             ('workspace-cleanup=jenkins_jobs.modules.wrappers:'
              'workspace_cleanup'),
         ],
@@ -216,6 +217,7 @@ setuptools.setup(
             'parameters=jenkins_jobs.modules.parameters:Parameters',
             'publishers=jenkins_jobs.modules.publishers:Publishers',
             'properties=jenkins_jobs.modules.properties:Properties',
+            'redmine = jenkins_jobs.modules.redmine:Redmine',
             'reporters=jenkins_jobs.modules.reporters:Reporters',
             'scm=jenkins_jobs.modules.scm:SCM',
             'triggers=jenkins_jobs.modules.triggers:Triggers',
